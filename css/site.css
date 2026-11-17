@@ -39,6 +39,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,label:focus-within{outl
 .facts a,.now a{font-weight:700;margin-right:.35em}
 code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em}
 
+/* research: a paper entry, set plainly. sentence case, no jokes */
+.paper{gap:14px}
+.paper .status{font-size:15px;font-weight:700}
+.paper .ptitle{font-size:clamp(30px,6.2cqw,50px);font-weight:750;letter-spacing:-.022em;line-height:1.05;max-width:16em;text-wrap:balance}
+.paper .authors{font-size:17px;line-height:1.4}
+.paper .authors small{display:block;margin-top:4px;font-size:14.5px}
+.paper .venue{font-size:16px;font-style:italic}
+.paper .abstract{font-size:17px;line-height:1.55;max-width:34em}
+
 /* the little readout on every picture */
 .tag{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);display:flex;flex-wrap:wrap;gap:3px 14px;align-items:baseline;background:var(--black);color:var(--white);padding:6px 10px 7px;font-size:13px;line-height:1.25;font-variant-numeric:tabular-nums}
 .tag button{font:inherit;font-weight:800;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.22em;-webkit-user-select:none;user-select:none}

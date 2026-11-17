@@ -7,6 +7,7 @@ Vamsi's personal site: one static page where every picture is drawn live in the 
 - No build step, no framework, no runtime dependencies. One stylesheet and three script tags, loaded in this order: `prim.js`, `art.js`, `app.js`.
 - One typeface, Bricolage Grotesque. Type is black or white only. Colour belongs to the spreads, and the tokens are at the top of `css/site.css`.
 - Copy is lowercase, dry, first person, short sentences. No slogans and nothing a careers page would say. Product names and acronyms keep their case (LaTeX, PyPI, ML).
+- The research section is the exception: sentence case, no jokes, no quips on its picture. Set papers like a publication list (status, title, authors with equal-contribution marks, venue, abstract, role, links). Never state a result or method detail Vamsi has not confirmed.
 - Pictures are drawn, never pasted. To add one, write a painter in `js/art.js` or point `data-photo` at a file in `img/`. Do not add a finished image of a picture.
 - Only use photos Vamsi took or has permission to use. No press photos, no stock, nothing lifted from another site.
 - `js/prim.js` is a port of Primitive (MIT). Keep its notice at the top of the file. The single deliberate difference from the original is marked in the `Model` constructor; say so if you add another.
