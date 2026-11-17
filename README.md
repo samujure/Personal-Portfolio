@@ -82,4 +82,5 @@ GitHub Pages serves this repo as it is: Settings, Pages, "Deploy from a branch",
 
 - The drawing method is [Primitive](https://github.com/fogleman/primitive) by Michael Fogleman, used under the MIT License. The notice is in `js/prim.js` and `THIRD_PARTY.md`. One change from the original: the shapes it tries get smaller as the picture fills in.
 - The typeface is Bricolage Grotesque, loaded from Google Fonts.
+- The hero copies a photo of *Bear* (2005) by Tim Hawkinson, Stuart Collection, UC San Diego. Photo: UC San Diego. `img/bear.jpg` is a 640px copy; remove it if the rights holder asks.
 - Everything else, code and writing, is Vamsi's. No licence has been chosen for it yet.

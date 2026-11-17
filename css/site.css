@@ -119,6 +119,7 @@ code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em
 .now p+p{margin-top:12px}
 footer{background:var(--black);color:var(--white);padding:24px var(--pad) 52px;font-size:14.5px;line-height:1.5}
 footer p{max-width:62em;border-top:1px solid rgba(255,255,255,.3);padding-top:20px}
+footer p+p{border-top:0;padding-top:8px}
 
 @media (max-width:880px){
   .spread,.pair,.now{grid-template-columns:minmax(0,1fr)}

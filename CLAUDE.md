@@ -9,7 +9,7 @@ Vamsi's personal site: one static page where every picture is drawn live in the 
 - Copy is lowercase, dry, first person, short sentences. No slogans and nothing a careers page would say. Product names and acronyms keep their case (LaTeX, PyPI, ML).
 - The research section is the exception: sentence case, no jokes, no quips on its picture. Set papers like a publication list (status, title, authors with equal-contribution marks, venue, abstract, role, links). Never state a result or method detail Vamsi has not confirmed.
 - Pictures are drawn, never pasted. To add one, write a painter in `js/art.js` or point `data-photo` at a file in `img/`. Do not add a finished image of a picture.
-- Only use photos Vamsi took or has permission to use. No press photos, no stock, nothing lifted from another site.
+- Only use photos Vamsi took or has permission to use. No press photos, no stock, nothing lifted from another site. One exception, Vamsi's call: the hero copies a UC San Diego photo of Tim Hawkinson's *Bear*, credited in the footer and kept small (640px). Keep the credit with it.
 - `js/prim.js` is a port of Primitive (MIT). Keep its notice at the top of the file. The single deliberate difference from the original is marked in the `Model` constructor; say so if you add another.
 - Numbers on the page must be real and checkable. An unknown stays a `<span class="tbd">` until Vamsi supplies it.
 - Do not put an email address on the page until Vamsi says which one.

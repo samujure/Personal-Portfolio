@@ -21,14 +21,14 @@
       <p class="lede">i like it when things show their work. so i'm building an app that turns handwritten math into LaTeX, and i do research on whether language models actually use the reasoning they write down. math-cs at uc san diego.</p>
     </div>
   </div>
-  <!-- To make the hero copy a photo of yours: put the file in img/, add data-photo="img/yourfile.jpg" to this figure,
-       and delete data-count so the page picks a budget for it. data-paint stays as the fallback. See README. -->
-  <figure class="art" data-paint="geisel" data-type="tri" data-count="360" data-quip="close enough.">
-    <canvas role="img" aria-label="Geisel Library at sunset with palm trees, drawn from a few hundred overlapping shapes"></canvas>
+  <!-- The hero copies img/bear.jpg (credited in the footer). With no data-count the page picks a budget from how busy
+       the photo is. data-paint="geisel" is the fallback if the photo cannot load. See README. -->
+  <figure class="art" data-photo="img/bear.jpg" data-paint="geisel" data-type="tri" data-quip="close enough.">
+    <canvas role="img" aria-label="Tim Hawkinson's Bear, a giant sculpture of stacked boulders, lit in blue and orange at night, drawn from overlapping triangles"></canvas>
     <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
   </figure>
   <div class="lab">
-    <p>that picture is geisel library, and it's being drawn right now. a hill climber tries a random shape, keeps it if the picture gets less wrong, and repeats. my face goes there once i find a photo i like. until then, pick what it draws with:</p>
+    <p>that's bear, the boulder sculpture outside the engineering buildings, and it's being drawn right now. a hill climber tries a random shape, keeps it if the picture gets less wrong, and repeats. pick what it draws with:</p>
     <div class="pick" role="group" aria-label="Shape the hill climber draws with">
       <button type="button" data-type="tri" aria-pressed="true">triangles</button>
       <button type="button" data-type="rell" aria-pressed="false">blobs</button>
@@ -231,6 +231,7 @@
 
 <footer>
   <p>every picture on this page is drawn in your browser while you watch. the method is <a href="https://github.com/fogleman/primitive">Primitive</a> by Michael Fogleman, used under the <a href="https://github.com/fogleman/primitive/blob/0373c216458be1c4b40655b796a3aefedf8b7d23/LICENSE.md">MIT license</a>: try random shapes, keep the ones that help. one change from the original: the shapes it tries get smaller as the picture fills in. the typeface is Bricolage Grotesque. site by vamsi and claude.</p>
+  <p>top picture: <i>Bear</i> (2005), Tim Hawkinson, <a href="https://stuartcollection.ucsd.edu/artist/hawkinson.html">Stuart Collection</a>, UC San Diego. photo: UC San Diego.</p>
 </footer>
 
 <!-- Order matters: the engine, then the pictures it copies, then the page. No build step. -->
