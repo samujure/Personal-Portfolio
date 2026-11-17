@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vamsi Amujure</title>
+<meta name="description" content="Vamsi Amujure. Math-CS at UC San Diego. Building InkTeX, and doing research on whether language models use the reasoning they write down.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="spread hero">
+  <div class="txt">
+    <nav aria-label="Sections">
+      <a href="#work">built</a><a href="#research">research</a><a href="#worlds">worlds</a><a href="#shelf">shelf</a><a href="#now">now</a>
+    </nav>
+    <div>
+      <h1>vamsi</h1>
+      <p class="lede">i like it when things show their work. so i'm building an app that turns handwritten math into LaTeX, and i do research on whether language models actually use the reasoning they write down. math-cs at uc san diego.</p>
+    </div>
+  </div>
+  <!-- To make the hero copy a photo of yours: put the file in img/, add data-photo="img/yourfile.jpg" to this figure,
+       and delete data-count so the page picks a budget for it. data-paint stays as the fallback. See README. -->
+  <figure class="art" data-paint="geisel" data-type="tri" data-count="360" data-quip="close enough.">
+    <canvas role="img" aria-label="Geisel Library at sunset with palm trees, drawn from a few hundred overlapping shapes"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="lab">
+    <p>that picture is geisel library, and it's being drawn right now. a hill climber tries a random shape, keeps it if the picture gets less wrong, and repeats. my face goes there once i find a photo i like. until then, pick what it draws with:</p>
+    <div class="pick" role="group" aria-label="Shape the hill climber draws with">
+      <button type="button" data-type="tri" aria-pressed="true">triangles</button>
+      <button type="button" data-type="rell" aria-pressed="false">blobs</button>
+      <button type="button" data-type="rect" aria-pressed="false">bricks</button>
+      <button type="button" data-type="circ" aria-pressed="false">dots</button>
+    </div>
+    <div class="dial">
+      <label for="count">and how many it gets: <output id="count-out" for="count">360</output></label>
+      <input type="range" id="count" min="0" max="100" step="1" value="33">
+    </div>
+    <div class="pick">
+      <label class="file">use your own photo<input class="vh" type="file" id="photo" accept="image/*"></label>
+      <button type="button" id="photo-back" hidden>back to the original</button>
+    </div>
+    <p id="photo-note" aria-live="polite"></p>
+  </div>
+</header>
+
+<main>
+<section class="band" id="work">
+  <h2>stuff i built.</h2>
+  <p>the finished-enough ones. everything else is grounded until it ships.</p>
+</section>
+
+<section class="spread" style="--bg:var(--ink);--fg:var(--white)">
+  <figure class="art" data-paint="inktex" data-type="rell" data-count="240" data-quip="more legible than my actual notes.">
+    <canvas role="img" aria-label="An integral sign in pale ink on blue, drawn from overlapping ellipses"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h3 class="name" style="--fit:31cqw">inktex</h3>
+    <p class="hook">write math by hand. get LaTeX back.</p>
+    <p>a handwriting-first overleaf for ipad. you write, it typesets, live. the recognition model is mine, trained on pen strokes instead of screenshots, and nothing you write gets shipped off to somebody's API. i started it because typing <code>\frac{}{}</code> forty times a night was becoming my whole personality.</p>
+    <dl class="facts">
+      <dt>status</dt><dd>building v2. ships feb 2027.</dd>
+      <dt>error rate</dt><dd><span class="tbd">tbd</span> vs 5.49% for the stroke baseline in the MathWriting paper</dd>
+      <dt>before this</dt><dd>a chrome extension, and before that a small CNN called <a href="https://github.com/samujure/BUDDHI.v0.1.0">buddhi</a></dd>
+      <dt>links</dt><dd><a href="https://github.com/samujure/InkTeX">repo</a> <span class="tbd">testflight</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="spread flip" style="--bg:var(--mint);--fg:var(--white)">
+  <figure class="art" data-paint="thrift" data-type="rect" data-count="240" data-quip="cached. the next one is free.">
+    <canvas role="img" aria-label="Two gold coins with a cent sign on green, drawn from overlapping rectangles"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h3 class="name" style="--fit:24cqw;--track:-.03em">thriftlm</h3>
+    <p class="hook">your agent already solved this last tuesday.</p>
+    <p>thriftlm caches the plans LLM agents come up with, so you stop paying for the same thought twice. a few papers' worth of ideas plus some of my own, and you can pip install it.</p>
+    <dl class="facts">
+      <dt>status</dt><dd>shipped. it's on PyPI.</dd>
+      <dt>savings</dt><dd><span class="tbd">tbd</span> measured on a real coding-agent run</dd>
+      <dt>next</dt><dd>making it work inside claude code</dd>
+      <dt>links</dt><dd><a href="https://pypi.org/project/thriftlm/">pypi</a> <a href="https://github.com/samujure/ThriftLM">repo</a></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="spread" style="--bg:var(--yolk);--fg:var(--black)">
+  <figure class="art" data-paint="llm" data-type="circ" data-count="520" data-alpha="215" data-quip="you see the question mark, right?">
+    <canvas role="img" aria-label="A colour vision test plate hiding a question mark, drawn from overlapping circles"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h3 class="name" style="--fit:27cqw">name that llm</h3>
+    <p class="hook">18 chatbots, one paragraph. who wrote it?</p>
+    <p>a kaggle competition where you fingerprint which model wrote a short passage. i'm doing it over winter break, for fun and to find out what gives each model away. the picture is a colour vision test with a question mark in it. probably.</p>
+    <dl class="facts">
+      <dt>when</dt><dd>dec 16 to jan 13</dd>
+      <dt>after</dt><dd>a write-up and a guess-the-model game, right here</dd>
+      <dt>result</dt><dd><span class="tbd">tbd</span> i'll post it even if it's embarrassing</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="spread flip" style="--bg:var(--coral);--fg:var(--black)">
+  <figure class="art" data-paint="atlas" data-type="tri" data-count="260" data-quip="converged. allegedly.">
+    <canvas role="img" aria-label="A loss surface with four valleys, drawn from overlapping triangles, with an optimiser's path traced over it"></canvas>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="descent" pathLength="1" fill="none" stroke="#fff" stroke-width=".62" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <circle class="from" r="1.5" fill="none" stroke="#fff" stroke-width=".62"/>
+      <circle class="to" r="1.5" fill="#fff"/>
+    </svg>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h3 class="name" style="--fit:23cqw">gradient atlas</h3>
+    <p class="hook">the math behind ML, drawn instead of hand-waved.</p>
+    <p>six chapters of visualizations in manim, three.js and mafs, built out of my own study notes. the picture is a real loss surface (himmelblau's function), and the white line is an optimizer actually running on it. hit redo and it rolls off the hill in a new direction.</p>
+    <dl class="facts">
+      <dt>made with</dt><dd>manim, three.js, mafs</dd>
+      <dt>links</dt><dd><a href="https://github.com/samujure/GradientAtlas">repo</a> <span class="tbd">live link</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="spread" id="research" style="--bg:var(--white);--fg:var(--black)">
+  <figure class="art" data-paint="cot" data-type="tri" data-count="220" data-quip="the red one is the step we messed with.">
+    <canvas role="img" aria-label="Three glowing dots arranged as a therefore sign, one of them red, drawn from overlapping triangles"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h2 class="name" style="--fit:13.5cqw">does chain-of-thought actually do anything?</h2>
+    <p class="hook">when a model shows its work, is that the work, or a nice story it wrote afterwards?</p>
+    <p>two teammates and i came up with the question. then we went inside the models, messed with the reasoning mid-thought, and watched whether the answers noticed. the three dots are a "therefore" sign.</p>
+    <dl class="facts">
+      <dt>my part</dt><dd>co-first author</dd>
+      <dt>where</dt><dd>in prep for the EACL 2027 student research workshop, with algoverse</dd>
+      <dt>paper</dt><dd><span class="tbd">arxiv link, after dec 15</span></dd>
+      <dt>result</dt><dd><span class="tbd">the one figure that matters</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="band" id="worlds">
+  <h2>i also make up worlds.</h2>
+  <p>nobody asked. two so far.</p>
+</section>
+<div class="pair">
+  <article style="--bg:var(--deep);--fg:var(--white)">
+    <figure class="art" data-paint="starfall" data-type="tri" data-count="280" data-quip="do not wish on that one.">
+      <canvas role="img" aria-label="A meteor falling over a mountain in a dark sea, drawn from overlapping triangles"></canvas>
+      <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+    </figure>
+    <div class="txt">
+      <h3 class="name" style="--fit:24cqw;--track:-.035em">starfall</h3>
+      <p class="hook">the gods tried to reboot the universe. it broke the timeline instead.</p>
+      <p>a novel series. vidyut and surya have to live through the ages in the wrong order. it goes about how you'd expect.</p>
+      <p><span class="tbd">chapter one goes here</span></p>
+    </div>
+  </article>
+  <article style="--bg:var(--plum);--fg:var(--white)">
+    <figure class="art" data-paint="wraith" data-type="rect" data-count="320" data-quip="he's in there somewhere.">
+      <canvas role="img" aria-label="A vertical neon city under a hovering ship, drawn from overlapping rectangles"></canvas>
+      <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+    </figure>
+    <div class="txt">
+      <h3 class="name" style="--fit:15.5cqw">the wraith &amp; vespera</h3>
+      <p class="hook">the city's criminals are scared of a monster. it's one guy.</p>
+      <p>a comic. after world war three, aliens own the economy and the city only grows upward. nobody has survived meeting him, so the stories got out of hand.</p>
+      <p><span class="tbd">first inked page goes here</span></p>
+    </div>
+  </article>
+</div>
+
+<section class="spread" id="shelf" style="--bg:var(--teal);--fg:var(--white)">
+  <figure class="art" data-paint="shelf" data-type="rrect" data-count="240" data-quip="alphabetised by vibes.">
+    <canvas role="img" aria-label="A shelf of colourful books, drawn from overlapping rectangles"></canvas>
+    <figcaption class="tag"><span class="stat"></span><button type="button" class="peek" title="Hold to see the picture it is copying">hold to peek</button><button type="button" class="redo">redo</button></figcaption>
+  </figure>
+  <div class="txt">
+    <h2 class="name" style="--fit:22cqw">the shelf</h2>
+    <p class="hook">i read a few books at once and finish most of them.</p>
+    <div class="books">
+      <div class="open"><h3>open right now</h3><ul><li>the art of war</li><li>the mahabharata (debroy)</li></ul></div>
+      <div><h3>finished</h3><ul><li>the odyssey</li><li>the aeneid</li><li>herodotus, histories</li><li>aristophanes, clouds</li><li>sallust, catiline</li><li>mandeville's travels</li><li>intro to statistical learning</li><li>mathematics for ML</li></ul></div>
+      <div class="next"><h3>up next</h3><ul><li>dune</li><li>gödel, escher, bach</li><li>the dream machine</li><li>masters of doom</li><li>isaacson's leonardo</li></ul></div>
+    </div>
+    <form class="rec" id="rec">
+      <h3>what should i read next?</h3>
+      <label for="rec-title">the book<input id="rec-title" name="title" required maxlength="80" autocomplete="off"></label>
+      <label for="rec-why">why i'd like it, in one line<input id="rec-why" name="why" maxlength="120" autocomplete="off"></label>
+      <label for="rec-who">who's asking<input id="rec-who" name="who" maxlength="40" autocomplete="off"></label>
+      <button type="submit">add to the pile</button>
+      <small>prototype: this only saves in your browser. the real one sends it to me first, so nobody can put fifty shades on my website.</small>
+      <ul class="pile" id="pile" aria-live="polite"></ul>
+    </form>
+  </div>
+</section>
+
+<section class="now" id="now">
+  <div>
+    <h2>right now</h2>
+    <ul>
+      <li>submitting the chain-of-thought paper (dec 15)</li>
+      <li>building inktex v2 for ipad (feb 28)</li>
+      <li>losing gracefully on kaggle (until jan 13)</li>
+      <li>the mahabharata, one volume at a time</li>
+    </ul>
+  </div>
+  <div>
+    <h2>grounded until april</h2>
+    <p>a surveillance AI named after the one batman built and regretted. a kitchen camera that reports whoever left dishes in the sink. a game world where the NPCs have egos.</p>
+    <p>none of them get touched until the first list is done.</p>
+  </div>
+  <div>
+    <h2>say hi</h2>
+    <p><a href="https://github.com/samujure">github</a> <span class="tbd">email</span> <span class="tbd">x</span></p>
+    <p>i reply fastest to book recommendations and people who found a bug.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>every picture on this page is drawn in your browser while you watch. the method is <a href="https://github.com/fogleman/primitive">Primitive</a> by Michael Fogleman, used under the <a href="https://github.com/fogleman/primitive/blob/0373c216458be1c4b40655b796a3aefedf8b7d23/LICENSE.md">MIT license</a>: try random shapes, keep the ones that help. one change from the original: the shapes it tries get smaller as the picture fills in. the typeface is Bricolage Grotesque. site by vamsi and claude.</p>
+</footer>
+
+<!-- Order matters: the engine, then the pictures it copies, then the page. No build step. -->
+<script src="js/prim.js"></script>
+<script src="js/art.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

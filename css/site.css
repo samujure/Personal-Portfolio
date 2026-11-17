@@ -1,0 +1,116 @@
+/* Layout idea: a stack of two-page spreads. One page is a picture being drawn live by a hill climber,
+   the facing page is a flat colour with words on it. One typeface, black or white type only. */
+:root{
+  color-scheme:light;
+  --black:#000; --white:#fff;
+  --sun:#ff5a1f;      /* hero, pulled from the sunset */
+  --ink:#1b3bd0;      /* inktex */
+  --mint:#0b6b49;     /* thriftlm */
+  --yolk:#ffb81c;     /* name that llm */
+  --coral:#f26a4b;    /* gradient atlas */
+  --deep:#0c2a4a;     /* starfall */
+  --plum:#2a0a3f;     /* the wraith */
+  --teal:#12414c;     /* the shelf */
+  --font:"Bricolage Grotesque","Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+  --pad:clamp(26px,5.4vw,88px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--white);font-family:var(--font);font-size:18px;line-height:1.45;font-weight:500;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,dl,dd,figure,ul{margin:0;padding:0}
+a{color:inherit;text-underline-offset:.2em}
+a:focus-visible,button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid currentColor;outline-offset:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* spreads */
+.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--bg);color:var(--fg)}
+.art{position:sticky;top:0;align-self:start;height:min(50vw,88vh);overflow:hidden;background:var(--bg)}
+.art canvas,.art svg{position:absolute;inset:0;width:100%;height:100%}
+.art canvas{object-fit:cover}
+.art svg{pointer-events:none}
+.flip .art{order:2}
+.txt{container-type:inline-size;padding:var(--pad);display:flex;flex-direction:column;justify-content:center;gap:20px}
+.name{font-size:clamp(58px,var(--fit,26cqw),210px);font-weight:800;letter-spacing:var(--track,-.045em);line-height:.9;margin:0 0 4px -.04em}
+.hook{font-size:clamp(23px,5cqw,34px);font-weight:700;letter-spacing:-.025em;line-height:1.1;max-width:17em;text-wrap:balance}
+.txt p{max-width:33em}
+.facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:7px 20px;font-size:16px;line-height:1.35;margin-top:6px}
+.facts dt{font-weight:800}
+.tbd{border:1.5px dashed currentColor;border-radius:4px;padding:0 .4em;font-weight:600;white-space:nowrap}
+.facts a,.now a{font-weight:700;margin-right:.35em}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em}
+
+/* the little readout on every picture */
+.tag{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);display:flex;flex-wrap:wrap;gap:3px 14px;align-items:baseline;background:var(--black);color:var(--white);padding:6px 10px 7px;font-size:13px;line-height:1.25;font-variant-numeric:tabular-nums}
+.tag button{font:inherit;font-weight:800;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.22em;-webkit-user-select:none;user-select:none}
+.tag .peek{touch-action:none}
+
+/* hero */
+.hero{--bg:var(--sun);--fg:var(--black);grid-template-rows:1fr auto}
+.hero .art{grid-column:2;grid-row:1 / span 2;position:relative;align-self:stretch;height:auto;min-height:min(54vw,92vh)}   /* the hero picture always fills its half */
+.hero .txt{justify-content:space-between;gap:40px;padding-bottom:0}
+.hero nav{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:16px;font-weight:700}
+.hero nav a{text-decoration:none}
+.hero nav a:hover{text-decoration:underline}
+.hero h1{font-size:clamp(96px,37cqw,340px);font-weight:800;letter-spacing:-.042em;line-height:.74;margin:0 0 .14em -.05em}
+.lede{font-size:clamp(20px,4.3cqw,27px);font-weight:600;line-height:1.24;letter-spacing:-.015em;max-width:21em}
+.lab{grid-column:1;grid-row:2;display:grid;gap:12px;align-content:start;font-size:15.5px;line-height:1.45;padding:26px var(--pad) var(--pad)}
+.lab p{max-width:35em}
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pick button,.file{font:inherit;font-weight:700;line-height:1.2;color:inherit;background:transparent;border:2px solid currentColor;padding:5px 12px 6px;cursor:pointer;border-radius:0}
+.pick button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.file{display:inline-block}
+.dial{display:flex;flex-wrap:wrap;align-items:center;gap:2px 14px}
+.dial input{flex:1 1 200px;max-width:300px;height:28px;margin:0;padding:0;color:inherit;background:none;-webkit-appearance:none;appearance:none;cursor:pointer}
+.dial input::-webkit-slider-runnable-track{height:2px;background:currentColor}
+.dial input::-moz-range-track{height:2px;background:currentColor}
+.dial input::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:24px;margin-top:-11px;background:currentColor;border:0;border-radius:0}
+.dial input::-moz-range-thumb{width:13px;height:24px;background:currentColor;border:0;border-radius:0}
+.dial output{display:inline-block;min-width:2.7em;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* statement bands */
+.band{background:var(--black);color:var(--white);padding:clamp(44px,8vw,124px) var(--pad) clamp(30px,4.6vw,68px)}
+.band h2{font-size:clamp(52px,11.6vw,196px);font-weight:800;letter-spacing:-.055em;line-height:.86;margin-left:-.04em;text-wrap:balance}
+.band p{margin-top:20px;font-size:clamp(18px,1.9vw,24px);font-weight:600;max-width:27em}
+
+/* double feature */
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.pair article{background:var(--bg);color:var(--fg);display:flex;flex-direction:column}
+.pair .art{position:relative;align-self:stretch;height:min(50vw,80vh)}
+.pair .txt{justify-content:flex-start}
+
+/* shelf */
+.books{display:grid;gap:14px}
+.books h3{font-size:16px;font-weight:800}
+.books ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.books li{border:1.5px solid currentColor;padding:2px 10px 3px;font-size:15.5px;font-weight:600;line-height:1.35}
+.books .open li{background:var(--fg);color:var(--bg)}
+.books .next li{border-style:dashed}
+.rec{display:grid;gap:12px;margin-top:10px;padding-top:22px;border-top:2px solid currentColor}
+.rec h3{font-size:clamp(24px,5cqw,32px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.rec label{display:grid;gap:2px;font-size:14px;font-weight:700}
+.rec input{font:inherit;font-weight:500;font-size:17px;color:inherit;background:transparent;border:0;border-bottom:2px solid currentColor;padding:4px 0 5px;border-radius:0;width:100%}
+.rec button{justify-self:start;font:inherit;font-weight:800;background:var(--fg);color:var(--bg);border:0;padding:9px 16px 10px;cursor:pointer;border-radius:0}
+.rec small{font-size:13.5px;line-height:1.4;max-width:36em}
+.pile{list-style:none;display:grid;gap:6px;font-size:15.5px;line-height:1.35}
+.pile b{font-weight:800}
+
+/* now */
+.now{background:var(--black);color:var(--white);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,4.4vw,70px);padding:clamp(44px,7vw,112px) var(--pad)}
+.now h2{font-size:clamp(34px,4.3vw,62px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin-bottom:18px}
+.now ul{list-style:none;display:grid;gap:9px}
+.now li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;align-items:baseline}
+.now li::before{content:"";width:0;height:0;border-left:.34em solid transparent;border-right:.34em solid transparent;border-bottom:.62em solid currentColor}
+.now p+p{margin-top:12px}
+footer{background:var(--black);color:var(--white);padding:24px var(--pad) 52px;font-size:14.5px;line-height:1.5}
+footer p{max-width:62em;border-top:1px solid rgba(255,255,255,.3);padding-top:20px}
+
+@media (max-width:880px){
+  .spread,.pair,.now{grid-template-columns:minmax(0,1fr)}
+  .art,.pair .art,.hero .art{position:relative;height:auto;min-height:0;aspect-ratio:1/1}
+  .flip .art{order:0}
+  /* phone order for the hero: name, picture, then the controls for the picture */
+  .hero{grid-template-rows:none}
+  .hero .art,.lab{grid-column:auto;grid-row:auto}
+  .hero .txt{gap:30px;padding-bottom:24px}
+  .lab{padding-top:20px}
+}
