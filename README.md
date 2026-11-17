@@ -47,7 +47,7 @@ A detailed photo needs far more shapes than a flat graphic: a portrait is a blan
 1. Save a photo you took as `img/hero.jpg`.
 2. On the hero `<figure>` in `index.html`, add `data-photo="img/hero.jpg"` and delete `data-count`.
 3. Rewrite the sentence under the name (it currently says the picture is Geisel) and the canvas `aria-label`.
-4. If the orange fights the photo, change `--sun` at the top of `css/site.css`.
+4. To match the hero background to your photo, change `--bear-light` at the top of `css/site.css`.
 
 The same attribute works on any picture, so a real screenshot of InkTeX can replace the painted integral the same way.
 

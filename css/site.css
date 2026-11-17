@@ -3,7 +3,7 @@
 :root{
   color-scheme:light;
   --black:#000; --white:#fff;
-  --sun:#ff5a1f;      /* hero, pulled from the sunset */
+  --bear-light:#164c59; /* hero, echoing the bear's reflected blue-green light */
   --ink:#1b3bd0;      /* inktex */
   --mint:#0b6b49;     /* thriftlm */
   --yolk:#ffb81c;     /* name that llm */
@@ -61,7 +61,7 @@ code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em
 .tag .peek{touch-action:none}
 
 /* hero */
-.hero{--bg:var(--sun);--fg:var(--black);grid-template-rows:1fr auto}
+.hero{--bg:var(--bear-light);--fg:var(--white);grid-template-rows:1fr auto}
 .hero .art{grid-column:2;grid-row:1 / span 2;position:relative;align-self:stretch;height:auto;min-height:min(54vw,92vh)}   /* the hero picture always fills its half */
 .hero .txt{justify-content:space-between;gap:40px;padding-bottom:0}
 .hero nav{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:16px;font-weight:700}
