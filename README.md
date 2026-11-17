@@ -38,6 +38,7 @@ Each picture is a `<figure class="art">` with a few attributes:
 | `data-count` | How many shapes it gets. Leave it off a photo and the page picks 800 to 2,400 from how busy the photo is |
 | `data-alpha` | Opacity of each shape, 1 to 255. Default 128 |
 | `data-quip` | The line the readout ends on once the picture is finished |
+| `data-video` | A demo clip for this picture. Once the drawing finishes, the picture nudges once and a "▶ demo" button appears; hovering (mouse) or pressing it fades the video in over the drawing |
 
 A detailed photo needs far more shapes than a flat graphic: a portrait is a blank patch at 360 and recognisable from about 1,000.
 
@@ -49,6 +50,15 @@ A detailed photo needs far more shapes than a flat graphic: a portrait is a blan
 4. If the orange fights the photo, change `--sun` at the top of `css/site.css`.
 
 The same attribute works on any picture, so a real screenshot of InkTeX can replace the painted integral the same way.
+
+## Add a demo video
+
+1. Record 5 to 10 seconds of the project working. No sound needed.
+2. Make it small (aim for under 2 MB):
+   `ffmpeg -i raw.mov -vf "scale=960:-2" -an -c:v libx264 -crf 28 -preset slow -movflags +faststart img/thriftlm.mp4`
+3. Add `data-video="img/thriftlm.mp4"` to that project's `<figure>`. The drawing stays as it is; the video only shows on hover or on the button.
+
+Good first candidates: ThriftLM (a terminal recording), Gradient Atlas (a screen recording). InkTeX once v2 works.
 
 ## Still to fill in
 

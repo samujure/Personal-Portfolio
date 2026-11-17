@@ -52,6 +52,7 @@
         peek.addEventListener('contextmenu', e => e.preventDefault());
       }
       if (redo) redo.addEventListener('click', () => this.reset());
+      if (d.video) this.demo(d.video);
     }
     size() {                                                            // the picture takes the shape of its panel
       const r = this.fig.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -90,7 +91,36 @@
       this.image = keep; this.res = 256; this.reset();
       if (auto) this.setCount(budgetFor(this.busy));
     }
+    /* data-video: once the drawing is done the picture nudges once and a "demo" button appears.
+       hovering (mouse) or pressing the button fades the video in over the drawing; leaving fades back. */
+    demo(src) {
+      const fig = this.fig, v = document.createElement('video'), btn = document.createElement('button');
+      v.className = 'demo'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none'; v.src = src;
+      v.setAttribute('aria-hidden', 'true'); v.disablePictureInPicture = true;
+      fig.insertBefore(v, $('.tag', fig));
+      btn.type = 'button'; btn.className = 'play'; btn.hidden = true; btn.textContent = '▶ demo'; btn.setAttribute('aria-pressed', 'false');
+      $('.tag', fig).append(btn);
+      this.vid = v; this.playBtn = btn; this.nudged = false;
+      const set = on => {
+        if (on === fig.classList.contains('playing')) return;
+        fig.classList.toggle('playing', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? '■ back to drawing' : '▶ demo';
+        if (on) { const pr = v.play(); if (pr) pr.catch(() => set(false)); } else v.pause();
+      };
+      this.playing = set;
+      btn.addEventListener('click', () => set(!fig.classList.contains('playing')));
+      if (!reduce) {
+        fig.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && this.done && !this.peeking) set(true); });
+        fig.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(false); });
+      }
+      v.addEventListener('error', () => { set(false); btn.hidden = true; this.vid = null; console.warn('Could not load ' + src + '. The drawing stays.'); });
+    }
+    finished() {                                                        // called each time a drawing completes
+      if (!this.vid || !this.playBtn.hidden) return;
+      this.playBtn.hidden = false; this.vid.preload = 'metadata';     // a missing file shows up now, and its button goes away
+      if (!reduce && !this.nudged) { this.nudged = true; this.canvas.classList.add('nudge'); setTimeout(() => this.canvas.classList.remove('nudge'), 700); }
+    }
     reset() {
+      if (this.playing) { this.playing(false); this.playBtn.hidden = true; }
       const R = this.res, w = this.aspect >= 1 ? R : Math.round(R * this.aspect), h = this.aspect >= 1 ? Math.round(R / this.aspect) : R;
       const x = blank(w, h).getContext('2d', { willReadFrequently: true }); this.source(x, w, h);
       const px = x.getImageData(0, 0, w, h).data;
@@ -111,7 +141,7 @@
     setCount(n) {                                                       // change the budget: fewer shows an earlier state, more keeps going
       n = Math.max(1, Math.round(n)); if (n === this.count) return;
       const made = this.model.shapes.length, had = Math.min(this.count, made), have = Math.min(n, made);
-      this.count = n; this.done = made >= n;
+      this.count = n; this.done = made >= n; if (this.done) this.finished();
       if (this.peeking) { this.peeking = false; this.redraw(); }
       else if (reduce) { if (this.done) this.redraw(); }                 // still pictures only: the old one stays until the new one is finished
       else if (have < had) this.redraw();
@@ -128,7 +158,7 @@
         const s = this.model.step(); this.owed--; drew = true;
         if (!reduce) Prim.draw(this.ctx, s);
       }
-      if (this.model.shapes.length >= this.count) { this.done = true; if (reduce) this.redraw(); }
+      if (this.model.shapes.length >= this.count) { this.done = true; if (reduce) this.redraw(); this.finished(); }
       if (drew) this.report();
     }
     report() {

@@ -48,6 +48,13 @@ code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em
 .paper .venue{font-size:16px;font-style:italic}
 .paper .abstract{font-size:17px;line-height:1.55;max-width:34em}
 
+/* demo videos: fade in over the drawing; the drawing nudges once when it is done */
+.art video.demo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none;background:var(--bg)}
+.art.playing video.demo{opacity:1}
+.art canvas.nudge{animation:nudge .6s ease-in-out}
+@keyframes nudge{0%,100%{transform:scale(1)}45%{transform:scale(1.03)}}
+@media (prefers-reduced-motion:reduce){.art video.demo{transition:none}.art canvas.nudge{animation:none}}
+
 /* the little readout on every picture */
 .tag{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);display:flex;flex-wrap:wrap;gap:3px 14px;align-items:baseline;background:var(--black);color:var(--white);padding:6px 10px 7px;font-size:13px;line-height:1.25;font-variant-numeric:tabular-nums}
 .tag button{font:inherit;font-weight:800;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.22em;-webkit-user-select:none;user-select:none}

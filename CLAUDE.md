@@ -30,6 +30,7 @@ It serves the folder, opens the page at desktop, laptop and phone sizes with `?r
 - `.band` is a full-width black statement. `.pair` is two half-width articles side by side. `.now` is the three-column closing section.
 - Under 880px wide everything becomes one column and pictures become squares.
 - In `js/app.js`, each `figure.art` gets a `Piece`. A piece builds a small target (192px on the long side, 256px for photos), runs `Prim.Model` on it, and draws each accepted shape as a vector on a large canvas. Pictures only work while they are on screen, and all visible pictures share about 9ms of work per frame.
+- A figure with `data-video` gets a demo: when its drawing finishes the canvas nudges once (never on a loop), a "▶ demo" button joins the readout tag, and mouse hover or the button fades the video in. Videos are muted, looping, `preload="none"` until the drawing is done, and never autoplay under reduced motion.
 - The hero has extra controls: the shape picker, the shape-count slider, and "use your own photo", which never uploads anything.
 
 ## Backlog, one sitting each
